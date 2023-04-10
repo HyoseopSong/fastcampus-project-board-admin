@@ -20,14 +20,15 @@ spring:
     username: ${LOCAL_DB_USERNAME}
     password: ${LOCAL_DB_PASSWORD}
   jpa:
-#    defer-datasource-initialization: true
+    defer-datasource-initialization: true
     hibernate.ddl-auto: create
     show-sql: true
     properties:
       hibernate.format_sql: true
       hibernate.default_batch_fetch_size: 100
     open-in-view: false
-    database: mysql
+#    database: mysql
+#    generate-ddl: true
   sql.init.mode: always
   thymeleaf3.decoupled-logic: true
   security:
@@ -55,3 +56,4 @@ spring:
   config.activate.on-profile: test
   datasource:
     url: jdbc:h2:mem:testdb
+
