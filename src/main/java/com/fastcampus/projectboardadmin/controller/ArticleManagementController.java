@@ -14,12 +14,17 @@ import org.springframework.web.bind.annotation.*;
 public class ArticleManagementController {
 
     private final ArticleManagementService articleManagementService;
+    private final HttpServletRequest request;
 
     @GetMapping
     public String articles(Model model) {
         model.addAttribute(
                 "articles",
                 articleManagementService.getArticles().stream().map(ArticleResponse::withoutContent).toList()
+        );
+        model.addAttribute(
+                "requestURI",
+                request.getRequestURI()
         );
 
         return "management/articles";
@@ -36,10 +41,5 @@ public class ArticleManagementController {
         articleManagementService.deleteArticle(articleId);
 
         return "redirect:/management/articles";
-    }
-
-    @ModelAttribute("requestURI")
-    public String requestURI(final HttpServletRequest request) {
-        return request.getRequestURI();
     }
 }

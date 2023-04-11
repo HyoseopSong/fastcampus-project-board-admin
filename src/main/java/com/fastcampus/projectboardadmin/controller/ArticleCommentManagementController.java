@@ -12,11 +12,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ArticleCommentManagementController {
 
+    private final HttpServletRequest request;
     @GetMapping
     public String articleComments(
             @PageableDefault(size = 10, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable,
             Model model
     ) {
+        model.addAttribute(
+                "requestURI",
+                request.getRequestURI()
+        );
         return "management/article-comments";
     }
 }
