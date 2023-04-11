@@ -2,6 +2,7 @@ package com.fastcampus.projectboardadmin.controller;
 
 import com.fastcampus.projectboardadmin.dto.response.ArticleResponse;
 import com.fastcampus.projectboardadmin.service.ArticleManagementService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -40,4 +41,8 @@ public class ArticleManagementController {
         return "redirect:/management/articles";
     }
 
+    @ModelAttribute("requestURI")
+    public String requestURI(final HttpServletRequest request) {
+        return request.getRequestURI();
+    }
 }
