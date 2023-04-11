@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequestMapping("/management/article-comments")
 @Controller
-public class ArticleCommentsManagementController {
+public class ArticleCommentManagementController {
 
     @GetMapping
     public String articleComments(
