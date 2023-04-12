@@ -2,6 +2,7 @@ package com.fastcampus.projectboardadmin.controller;
 
 import com.fastcampus.projectboardadmin.dto.response.AdminAccountResponse;
 import com.fastcampus.projectboardadmin.service.AdminAccountService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -18,9 +19,16 @@ import java.util.List;
 public class AdminAccountController {
 
     private final AdminAccountService adminAccountService;
+    private final HttpServletRequest request;
 
     @GetMapping("/admin/members")
-    public String members() {
+    public String members(Model model) {
+
+        model.addAttribute(
+                "requestURI",
+                request.getRequestURI()
+        );
+
         return "admin/members";
     }
 
