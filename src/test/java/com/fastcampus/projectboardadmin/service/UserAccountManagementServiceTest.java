@@ -15,6 +15,7 @@ import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.client.MockRestServiceServer;
 
@@ -83,9 +84,10 @@ class UserAccountManagementServiceTest {
             this.mapper = mapper;
         }
 
+        @WithMockUser(username = "tester", roles = "USER")
         @DisplayName("회원 목록 API을 호출하면, 회원들을 가져온다.")
         @Test
-        void givenNothing_whenCallingUserAccountsApi_thenReturnsUserAccountList() throws Exception {
+         void givenNothing_whenCallingUserAccountsApi_thenReturnsUserAccountList() throws Exception {
             // Given
             UserAccountDto expectedUserAccount = createUserAccountDto("uno", "Uno");
             UserAccountClientResponse expectedResponse = UserAccountClientResponse.of(List.of(expectedUserAccount));
@@ -107,6 +109,7 @@ class UserAccountManagementServiceTest {
             server.verify();
         }
 
+        @WithMockUser(username = "tester", roles = "USER")
         @DisplayName("회원 ID와 함께 회원 API을 호출하면, 회원을 가져온다.")
         @Test
         void givenUserAccountId_whenCallingUserAccountApi_thenReturnsUserAccount() throws Exception {
@@ -131,6 +134,7 @@ class UserAccountManagementServiceTest {
             server.verify();
         }
 
+        @WithMockUser(username = "tester", roles = "MANAGER")
         @DisplayName("회원 ID와 함께 회원 삭제 API을 호출하면, 회원을 삭제한다.")
         @Test
         void givenUserAccountId_whenCallingDeleteUserAccountApi_thenDeletesUserAccount() throws Exception {
