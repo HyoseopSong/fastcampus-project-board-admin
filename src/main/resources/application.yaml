@@ -57,6 +57,15 @@ server:
 ---
 
 spring:
+  config.activate.on-profile: heroku
+  datasource.url: ${JAWSDB_URL}
+  jpa.hibernate.ddl-auto: create
+
+project.board.url: ${PROJECT_BOARD_URL}
+
+---
+
+spring:
   config.activate.on-profile: test
   datasource:
     url: jdbc:h2:mem:testdb
